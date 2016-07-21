@@ -24,6 +24,6 @@ print "[*] Gateway Info : ", gateInfo
 print "[*] Gateway IP : ", gateIP
 
 broadIP = ifIP.replace("."+ifIP.split(',')[-1], '')+".255"
-packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=sys.argv[2],pdst=gateIP)
+packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=sys.argv[1],pdst=gateIP)
 sendp(packet)
 	
