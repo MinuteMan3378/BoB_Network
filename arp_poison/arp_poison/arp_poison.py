@@ -16,11 +16,11 @@ def filt(pkt):
 def stopfilt(pkt):
 	return 1
 		
-ifName = netifaces.interfaces()
-ifName = ifName[1]
-
+ifList = netifaces.interfaces()
+ifName = ifList[2]
 ifInfo = netifaces.ifaddresses(ifName)
-ifMAC = ifInfo[17][0]['addr']
+print "[*] Interface Info : ", ifInfo
+ifMAC = ifInfo[-1000][0]['addr']
 ifIP = ifInfo[2][0]['addr']
 
 print "[*] My Interface Name : ", ifName
@@ -28,6 +28,7 @@ print "[*] My IP : ",ifIP
 print "[*] My MAC : ",ifMAC
 
 gateInfo = netifaces.gateways()
+
 gateIP = gateInfo['default'][2][0]
 print "[*] Gateway Info : ", gateInfo
 print "[*] Gateway IP : ", gateIP

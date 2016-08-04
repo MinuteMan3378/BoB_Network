@@ -12,6 +12,9 @@
     <OutputPath>.</OutputPath>
     <Name>arp_poison</Name>
     <RootNamespace>arp_poison</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>192.168.32.62</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
